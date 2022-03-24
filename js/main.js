@@ -1,19 +1,15 @@
-const checkStringLength = (comment = '', length = 0) => comment.length <= length;
+const checkStringLength = (str = '', maxLength = 0) => str.length <= maxLength;
 
 checkStringLength('Текст комментария', 99);
 
 const getRandomInteger = function (min, max) {
-  if ((typeof min !== 'number' && typeof max !== 'number')|| (min < 0 && max < 0)) {
+  if ((typeof min !== 'number' && typeof max !== 'number')) {
     return null;
   }
 
-  if (min < 0) {
-    min = 0;
-  }
+  min = min < 0 ? 0 : min;
 
-  if (max < 0) {
-    max = 0;
-  }
+  max = max < 0 ? 0 :max;
 
   if (min === max) {
     return Math.floor(min);
