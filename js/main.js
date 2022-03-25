@@ -7,9 +7,9 @@ const getRandomInteger = function (min, max) {
     return null;
   }
 
-min = min < 0 ? 0 : min;
+  min = min < 0 ? 0 :min;
 
-max = max < 0 ? 0 : max;
+  max = max < 0 ? 0 :max;
 
   if (min === max) {
     return Math.floor(min);
