@@ -70,14 +70,14 @@ const suffleArray = getSuffleIntArray(1000);
 const createRandomComments = function (maxLength) {
   const result = [];
   for (let i = 0; i < maxLength; i++) {
-  result.push({
-    id: suffleArray[counter++],
-    avatar: AVATAR_FOLDER + getRandomInt(1, 6) + AVATAR_EXTEND,
-    message: MESSAGES_COMMENTS[getRandomInt(0, MESSAGES_COMMENTS.length - 1)],
-    name: NAMES_USERS[getRandomInt(0, NAMES_USERS.length - 1)],
-  });
-}
-return result;
+    result.push({
+      id: suffleArray[counter++],
+      avatar: AVATAR_FOLDER + getRandomInt(1, 6) + AVATAR_EXTEND,
+      message: MESSAGES_COMMENTS[getRandomInt(0, MESSAGES_COMMENTS.length - 1)],
+      name: NAMES_USERS[getRandomInt(0, NAMES_USERS.length - 1)],
+    });
+  }
+  return result;
 };
 const createRandomPhoto = function (maxLength) {
   const result = [];
@@ -88,8 +88,8 @@ const createRandomPhoto = function (maxLength) {
       description: 'Лучшее фото',
       likes: getRandomInt(MIN_LIKES, MAX_LIKES),
       comments: createRandomComments(getRandomInt(2, 5)),
-  });
-}
+    });
+  }
   return result;
 };
 createRandomPhoto(MAX_ITEM_ID);
