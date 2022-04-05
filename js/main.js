@@ -45,6 +45,8 @@ const USER_NAMES = [
 const MAX_ITEM_ID = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
+const AVATAR_SRC = 'img/avatar-${random}.svg';
+const PHOTO_SRC = 'photos/${random}.jpg';
 const getRandomInt = function (min = 0, max = 0) {
   return Math.floor(Math.random() * (max - min) + min);
 };
@@ -52,8 +54,8 @@ const createRandomComments = function (maxLength) {
   const result = [];
   for (let i = 0; i < maxLength; i++) {
     result.push({
-      id: suffleArray[counter++],
-      avatar: 'img/avatar-${random}.svg',
+      id: i,
+      avatar: AVATAR_SRC,
       message: MESSAGE_COMMENTS[getRandomInt(0, MESSAGE_COMMENTS.length - 1)],
       name: USER_NAMES[getRandomInt(0, USER_NAMES.length - 1)],
     });
@@ -65,7 +67,7 @@ const createRandomPhoto = function (maxLength) {
   for (let i = 1; i <= maxLength; i++) {
     result.push({
       id: i,
-      url: 'photos/${random}.jpg',
+      url: PHOTO_SRC,
       description: 'Лучшее фото',
       likes: getRandomInt(MIN_LIKES, MAX_LIKES),
       comments: createRandomComments(getRandomInt(2, 5)),
