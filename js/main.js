@@ -45,34 +45,42 @@ const USER_NAMES = [
 const MAX_ITEM_ID = 25;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
-const AVATAR_SRC = 'img/avatar-${random}.svg';
-const PHOTO_SRC = 'photos/${random}.jpg';
-const getRandomInt = function (min = 0, max = 0) {
-  return Math.floor(Math.random() * (max - min) + min);
-};
-const createRandomComments = function (maxLength) {
-  const result = [];
-  for (let i = 0; i < maxLength; i++) {
-    result.push({
-      id: i,
-      avatar: AVATAR_SRC,
-      message: MESSAGE_COMMENTS[getRandomInt(0, MESSAGE_COMMENTS.length - 1)],
-      name: USER_NAMES[getRandomInt(0, USER_NAMES.length - 1)],
-    });
+const MAX_ID = 300;
+const MAX_AVATAR = 6;
+const MAX_ELEMENTS = 5;
+
+function getStringLength(comment, maxLength) {
+  if (comment.length <= maxLength) {
+    return true;
   }
-  return result;
-};
-const createRandomPhoto = function (maxLength) {
-  const result = [];
-  for (let i = 1; i <= maxLength; i++) {
-    result.push({
-      id: i,
-      url: PHOTO_SRC,
-      description: 'Лучшее фото',
-      likes: getRandomInt(MIN_LIKES, MAX_LIKES),
-      comments: createRandomComments(getRandomInt(2, 5)),
-    });
+}
+
+function getRandomNumber(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  if (min >= max) {
+    throw new Error('Невалидный тип данных');
   }
-  return result;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
+const getRandomComment = () => {
+  return {
+    id: getRandomNumber(1, MAX_ID),
+    avatar: `img/avatar-${getRandomNumber(1, MAX_AVATAR)}.svg`,
+    name: getRandomArrayElement(USER_NAMES),
+    message: getRandomArrayElement(MESSAGE_COMMENTS),
+  }
 };
-createRandomPhoto(MAX_ITEM_ID);
+
+let i = 1;
+
+const createPhotoDescription = () => ({
+  id: i,
+  url: `photos/${i++}.jpg`,
+  description: 'Нащ отель',
+  likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
+  comments: Array.from({ length: getRandomNumber(1, MAX_ELEMENTS) }, getRandomComment),
+});
+
+const SimilarPhotoDescription = Array.from({length: MAX_ITEM_ID}, createPhotoDescription);
